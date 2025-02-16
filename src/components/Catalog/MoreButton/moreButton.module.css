@@ -1,0 +1,27 @@
+.more-container {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.more-btn {
+  width: 120px;
+  height: 40px;
+
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #e8e8e8;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.more-btn:hover {
+  color: white;
+}
+
+.loading {
+  display: none;
+}

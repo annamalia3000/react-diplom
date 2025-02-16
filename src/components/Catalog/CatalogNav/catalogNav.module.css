@@ -1,0 +1,27 @@
+.catalog-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+  font-size: 1.3rem;
+  margin-bottom: 2em;
+}
+
+.catalog-nav-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: 35px;
+}
+
+.catalog-nav-item {
+}
+
+.catalog-nav-item:hover {
+  cursor: pointer;
+  color: red;
+}
+.active {
+  color: red;
+}

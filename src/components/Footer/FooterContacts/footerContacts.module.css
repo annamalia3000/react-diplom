@@ -1,0 +1,34 @@
+.footer-contacts {
+  text-align: end;
+  width: 220px;
+  line-height: 24px;
+}
+.footer-contacts-phone {
+    display: block;
+  }
+  
+  .footer-contacts-email {
+    display: block;
+  }
+
+  .footer-social-links {
+    margin-top: 10px;
+  }
+  .footer-social-link {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-image: url('/img/footer-sprite.png');
+  }
+  .footer-social-link-twitter {
+    background-position: -107px -42px;
+  }
+  .footer-social-link-vk {
+    background-position: -157px -42px;
+  }
+  .footer-social-link:hover {
+    cursor: pointer;
+  }

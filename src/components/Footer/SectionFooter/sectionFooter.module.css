@@ -1,0 +1,12 @@
+.section-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.section-content {
+}

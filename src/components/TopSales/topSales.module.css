@@ -1,0 +1,16 @@
+.topsales-container {
+  min-height: 300px;
+  display: flex; 
+  width: 100%;
+  justify-content: center;
+}
+
+.topsales-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, max-content));
+  gap: 20px;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}

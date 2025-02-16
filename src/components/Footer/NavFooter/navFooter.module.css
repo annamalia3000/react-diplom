@@ -1,0 +1,13 @@
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding-left: 15px;
+}
+
+.nav__items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: pointer;
+}

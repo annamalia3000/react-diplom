@@ -1,0 +1,11 @@
+.navbar-collapse {
+    display: flex;
+
+}
+
+.nav__items {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    cursor: pointer;
+}

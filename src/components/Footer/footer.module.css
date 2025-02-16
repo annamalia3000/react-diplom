@@ -1,0 +1,15 @@
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0 25px;
+  background-color: #f8f9fa;
+  justify-content: space-between;
+}
+
+.footer-mid-section {
+  width: 350px;
+}
+
+.footer-copyright {
+  font-size: 0.8em;
+}

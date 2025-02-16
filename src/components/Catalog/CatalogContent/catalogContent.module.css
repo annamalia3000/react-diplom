@@ -1,0 +1,8 @@
+.catalog-items {
+  display: grid;
+  grid-template-columns: repeat(3, max-content); 
+  grid-template-rows: repeat(3, auto); 
+  gap: 50px;
+  justify-content: space-around;
+  align-items: center;
+}
