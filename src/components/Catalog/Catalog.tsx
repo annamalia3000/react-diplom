@@ -5,6 +5,8 @@ import { Section } from "../Section/Section";
 import { CatalogContent } from "./CatalogContent/CatalogContent";
 import { CatalogNav } from "./CatalogNav/CatalogNav";
 import { MoreButton } from "./MoreButton/MoreButton";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/state/store";
 import classes from "./catalog.module.css";
 
 type ProductProps = {
@@ -24,33 +26,34 @@ export const Catalog = () => {
   const [offset, setOffset] = useState(0);
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
+
+  const searchValue = useSelector((state: RootState) => state.search.value);
 
   const url = import.meta.env.VITE_HOST;
   const { data: categories, loading: categoriesLoading } = useFetch<
     CategoryProps[]
   >(`${url}/api/categories`);
 
-  const apiUrl = categoryId
-    ? `${url}/api/items?categoryId=${categoryId}`
-    : `${url}/api/items`;
+  const apiUrl = `${url}/api/items?${
+    categoryId ? `categoryId=${categoryId}&` : ""
+  }${searchValue ? `q=${searchValue}&` : ""}offset=${offset}`;
 
-    const ofsetUrl= categoryId
-    ? `${url}/api/items?categoryId=${categoryId}&offset=`
-    : `${url}/api/items?offset=`;
 
   const { data: newProducts, loading: productsLoading } =
     useFetch<ProductProps[]>(apiUrl);
 
   useEffect(() => {
-    setProducts(newProducts || []);
+    setProducts([]);
     setOffset(0);
-    setHasMore(true);
-  }, [categoryId]);
+    setHasMore(false);
+  }, [categoryId, searchValue]);
 
   useEffect(() => {
     if (newProducts) {
-      setProducts(newProducts); 
+      console.log("Получены новые товары:", newProducts);
+      setProducts((prev) => [...prev, ...newProducts]);
+      setHasMore(newProducts.length === 6);
     }
   }, [newProducts]);
 
@@ -59,20 +62,22 @@ export const Catalog = () => {
       return;
     }
     setLoadingMore(true);
+    const nextOffset = offset + 6;
+    console.log(" Загружаем еще товары, новый offset:", nextOffset);
+
     try {
-      const response = await fetch(`${ofsetUrl}${offset + 6}`);
+      const response = await fetch(
+        `${url}/api/items?${categoryId ? `categoryId=${categoryId}&` : ""}${
+          searchValue ? `q=${searchValue}&` : ""
+        }offset=${nextOffset}`
+      );
       if (!response.ok) {
         throw new Error("Ошибка при загрузке товаров");
       }
       const moreItems: ProductProps[] = await response.json();
 
-      setProducts((prev) => [...prev, ...moreItems]);
-      setOffset((prev) => prev + 6);
-      console.log(offset);
-
-      if (moreItems.length < 6) {
-        setHasMore(false);
-      }
+      setHasMore(moreItems.length === 6);
+      setOffset(nextOffset);
     } catch (error) {
       console.error("Ошибка при загрузке товаров:", error);
     } finally {
@@ -81,7 +86,9 @@ export const Catalog = () => {
   };
 
   const handleCategoryChange = useCallback((id: number | null) => {
+    console.log("🛒 Выбрана категория:", id);
     setCategoryId(id);
+    setOffset(0);
   }, []);
 
   return (
@@ -98,11 +105,13 @@ export const Catalog = () => {
         ) : (
           <>
             <CatalogContent data={products} />
-            <MoreButton
-              loadMoreItems={loadMoreItems}
-              loading={loadingMore}
-              hasMore={hasMore}
-            />
+            {hasMore && (
+              <MoreButton
+                loadMoreItems={loadMoreItems}
+                loading={loadingMore}
+                hasMore={hasMore}
+              />
+            )}
           </>
         )}
       </Section>

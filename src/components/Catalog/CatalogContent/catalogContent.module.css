@@ -1,4 +1,5 @@
 .catalog-items {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, max-content); 
   grid-template-rows: repeat(3, auto); 

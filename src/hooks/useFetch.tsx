@@ -14,33 +14,32 @@ export function useFetch<T>(url: string, options?: RequestInit) {
   });
 
   useEffect(() => {
-    let isMounted = true;
+    const controller = new AbortController();
+    const signal = controller.signal;
 
     const fetchData = async () => {
       setState({ data: null, loading: true, error: null });
 
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, { ...options, signal });
         if (!response.ok) {
           throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
         }
         const result: T = await response.json();
-        if (isMounted) {
-          setState({ data: result, loading: false, error: null });
-        }
+        setState({ data: result, loading: false, error: null });
       } catch (err) {
-        if (isMounted) {
-          setState({ data: null, loading: false, error: (err as Error).message });
+        if (signal.aborted) {
+          return;
         }
+        setState({ data: null, loading: false, error: (err as Error).message });
       }
     };
 
     fetchData();
 
     return () => {
-      isMounted = false; 
+      controller.abort();
     };
   }, [url, options]);
-
   return state;
 }

@@ -1,0 +1,17 @@
+.contacts-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+  justify-content: center;
+  line-height: 2rem;
+  min-height: 200px;
+  height: 100%;
+}
+
+.contacts-title {
+  align-self: center;
+}
+
+.contacts-content {
+}

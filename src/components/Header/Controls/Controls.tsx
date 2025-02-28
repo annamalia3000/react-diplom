@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect } from "react";
+import { Search } from "../../Search/Search";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "../../../redux/state/store";
 import cn from "classnames";
 import classes from "./controls.module.css";
 
 export const Controls = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const searchValue = useSelector((state: RootState) => state.search.value);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSearchVisible) {
@@ -13,7 +19,12 @@ export const Controls = () => {
   }, [isSearchVisible]);
 
   const handleSearch = () => {
-    setSearchVisible((prev) => !prev);
+    if (isSearchVisible && searchValue) {
+      navigate("/catalog");
+      setSearchVisible((prev) => !prev);
+    } else {
+      setSearchVisible((prev) => !prev);
+    }
   };
 
   return (
@@ -36,19 +47,7 @@ export const Controls = () => {
         <div className={classes["header-controls-cart-full"]}>1</div>
         <div className={classes["header-controls-cart-menu"]}></div>
         {isSearchVisible && (
-          <form
-            data-id="search-form"
-            className={cn(
-              classes["header-controls-search-form"],
-              "form-inline"
-            )}
-          >
-            <input
-              ref={inputRef}
-              className={classes["form-control"]}
-              placeholder="Поиск"
-            />
-          </form>
+          <Search ref={inputRef} className={classes["search-header"]} />
         )}
       </div>
     </div>
