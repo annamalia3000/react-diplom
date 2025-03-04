@@ -1,4 +1,4 @@
-import { MoreLoader } from "../../../loaders/MoreLoader";
+import { Loader } from "../../Loader/Loader";
 import cn from "classnames";
 import classes from "./moreButton.module.css";
 
@@ -19,7 +19,7 @@ export const MoreButton = ({
   return (
     <div className={classes["more-container"]}>
       {loading ? (
-        <MoreLoader />
+        <Loader />
       ) : (
         <button
           className={cn(classes["more-btn"], "btn-outline-primary")}

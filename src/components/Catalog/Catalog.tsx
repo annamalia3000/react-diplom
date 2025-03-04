@@ -1,6 +1,6 @@
 import { useFetch } from "../../hooks/useFetch";
 import { useState, useCallback, useEffect } from "react";
-import { CatalogLoader } from "../../loaders/CatalogLoader";
+import { Loader } from "../Loader/Loader";
 import { Section } from "../Section/Section";
 import { CatalogContent } from "./CatalogContent/CatalogContent";
 import { CatalogNav } from "./CatalogNav/CatalogNav";
@@ -8,6 +8,7 @@ import { MoreButton } from "./MoreButton/MoreButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/state/store";
 import classes from "./catalog.module.css";
+
 
 type ProductProps = {
   id: number;
@@ -101,7 +102,7 @@ export const Catalog = () => {
           />
         )}
         {productsLoading ? (
-          <CatalogLoader />
+          <Loader />
         ) : (
           <>
             <CatalogContent data={products} />

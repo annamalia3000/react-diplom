@@ -1,5 +1,5 @@
 import { useFetch } from "../../hooks/useFetch";
-// import { TopSalesLoader } from "../../loaders/TopSalesLoader";
+import { Loader } from "../Loader/Loader";
 import { Card } from "../Card/Card";
 import { Section } from "../Section/Section";
 import classes from "./topSales.module.css";
@@ -12,11 +12,7 @@ type ProductProps = {
   price: number;
 };
 
-type TopSalesProps = {
-  loader: React.FC; 
-};
-
-export const TopSales = ({ loader: Loader } : TopSalesProps) => {
+export const TopSales = () => {
   const url = import.meta.env.VITE_HOST;
   const apiUrl = `${url}/api/top-sales`;
 
