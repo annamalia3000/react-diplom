@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header/Header";
-import { Banner } from "../Banner/Banner";
+import { Banner } from "./Banner/Banner";
 import { Footer } from "../Footer/Footer";
 import classes from "./layout.module.css";
 

@@ -54,14 +54,9 @@ section {
   margin-bottom: 2em;
 }
 
-/* Common Styles */
 .invisible {
   opacity: 0;
 }
-
-
-/* Catalog */
-
 
 .catalog-item-size {
   display: inline-block;

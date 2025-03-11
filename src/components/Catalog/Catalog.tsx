@@ -9,7 +9,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/state/store";
 import classes from "./catalog.module.css";
 
-
 type ProductProps = {
   id: number;
   images: string;
@@ -39,7 +38,6 @@ export const Catalog = () => {
   const apiUrl = `${url}/api/items?${
     categoryId ? `categoryId=${categoryId}&` : ""
   }${searchValue ? `q=${searchValue}&` : ""}offset=${offset}`;
-
 
   const { data: newProducts, loading: productsLoading } =
     useFetch<ProductProps[]>(apiUrl);
@@ -87,7 +85,6 @@ export const Catalog = () => {
   };
 
   const handleCategoryChange = useCallback((id: number | null) => {
-    console.log("🛒 Выбрана категория:", id);
     setCategoryId(id);
     setOffset(0);
   }, []);

@@ -1,0 +1,141 @@
+.product-container {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 100px;
+  padding: 10px;
+}
+
+.product-title {
+  align-self: center;
+}
+
+.product-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  height: 375px;
+}
+
+.product-image {
+  width: 40%;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.product-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.product-sizes {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+}
+
+.product-sizes-el {
+  width: 154px;
+}
+.product-sizes-available {
+  width: 154px;
+  margin-left: 5px;
+}
+
+.product-size-btn {
+  width: 60px;
+  height: 20px;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border: none;
+}
+
+.selected {
+  color: white;
+  background-color: #727e86;
+  border: 1px solid #727e86;
+  border-radius: 10px;
+}
+
+.product-count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.product-count-el {
+  text-align: right;
+  margin-right: 5px;
+}
+
+.product-count-btn-container {
+  width: 85px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #727e86;
+  border-radius: 6px;
+
+  margin-left: 5px;
+}
+
+.count {
+}
+
+.product-count-btn {
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: #727e86;
+  cursor: pointer;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+}
+
+.product-count-btn:hover {
+  background-color: #5a666d;
+}
+
+.product-cart-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  width: 100%;
+  color: white;
+  background-color: #e77c87;
+  height: 40px;
+  border: 1px solid;
+  border-radius: 6px;
+
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.product-cart-button:hover {
+  background-color: #d66572;
+}
+
+.inactive {
+  background-color: #c39ca0;
+}

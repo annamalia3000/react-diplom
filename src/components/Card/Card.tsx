@@ -22,7 +22,7 @@ export const Card = ({ id, img, title, price }: CardProps) => {
         <p className={classes["card-title"]}>{title}</p>
         <p className={classes["card-price"]}>{`${price} руб.`}</p>
         <a
-          href={`/products/${id}`}
+          href={`/catalog/${id}`}
           className={cn(classes["card-btn"], "btn-outline-primary")}
         >
           Заказать
