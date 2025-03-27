@@ -1,0 +1,60 @@
+.cartlist-container {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartlist-empty {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cartlist-title {
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 30px;
+}
+
+.cartlist-main-btn {
+  width: 95px;
+  height: 20px;
+  padding: 5px;
+  background-color: white;
+  border: 2px solid #e8e8e8;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cartlist-main-btn:hover {
+  color: white;
+  background-color: #e8e8e8;
+}
+
+.cartlist-content {
+  display: flex;
+  flex-direction: column;
+}
+.cartlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cartlist-table th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.cartlist-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.cartlist-table-col-span {
+  text-align: end;
+}

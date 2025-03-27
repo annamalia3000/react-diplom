@@ -2,27 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { Loader } from "../../components/Loader/Loader";
 import { useFetch } from "../../hooks/useFetch";
+import { useCart } from "../../hooks/useCart";
+import { DataProps } from "../../types/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./product.module.css";
-
-type SizesProps = {
-  size: string;
-  available: boolean;
-};
-
-type ItemProps = {
-  title: string;
-  images: string[];
-  sku: number;
-  manufacturer: string;
-  color: string;
-  material: string;
-  season: string;
-  reason: string;
-  sizes: SizesProps[];
-};
 
 export const Product = () => {
   const [count, setCount] = useState<number>(1);
@@ -31,7 +16,7 @@ export const Product = () => {
   const url = import.meta.env.VITE_HOST;
   const apiUrl = `${url}/api/items/${id}`;
 
-  const { data, loading } = useFetch<ItemProps>(apiUrl);
+  const { data, loading } = useFetch<DataProps>(apiUrl);
 
   const availableSizes = data?.sizes
     .filter((size) => size.available)
@@ -59,6 +44,14 @@ export const Product = () => {
   const handleDecrement = () => {
     if (count > 1) {
       setCount(count - 1);
+    }
+  };
+
+  const { addToCart } = useCart();
+
+  const handleCart = () => {
+    if (selectedSize && data) {
+      addToCart({ selectedSize, data, count });
     }
   };
 
@@ -133,14 +126,16 @@ export const Product = () => {
                   </button>
                 </div>
               </div>
-              <Link to="/cart"
+              <Link
+                to="/cart"
                 className={`${classes["product-cart-button"]} 
               
-              ${!selectedSize ? classes["inactive"] : ""}`}
+              ${!selectedSize ? classes["inactive"] : classes["active"]}`}
+                onClick={handleCart}
               >
                 В корзину
               </Link>
-            </>
+            </> 
           )}
         </div>
       </div>

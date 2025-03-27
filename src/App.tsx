@@ -15,6 +15,7 @@ import { Info } from "./pages/Info/Info";
 import { CatalogPage } from "./pages/CatalogPage/CatalogPage";
 import { Product } from "./pages/Product/Product";
 import { Cart } from "./pages/Cart/Cart";
+import { CartProvider } from "./providers/CartProvider";
 
 function App() {
   const routes = createBrowserRouter(
@@ -30,7 +31,11 @@ function App() {
       </Route>
     )
   );
-  return <RouterProvider router={routes} />;
+  return (
+    <CartProvider>
+      <RouterProvider router={routes} />;
+    </CartProvider>
+  );
 }
 
 export default App;

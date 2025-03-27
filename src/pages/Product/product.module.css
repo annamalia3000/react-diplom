@@ -87,15 +87,14 @@
 }
 
 .product-count-btn-container {
-  width: 85px;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border: 1px solid #727e86;
   border-radius: 6px;
 
-  margin-left: 5px;
+  gap: 7px;
 }
 
 .count {
@@ -129,13 +128,19 @@
   border-radius: 6px;
 
   margin-top: 10px;
-  cursor: pointer;
-}
-
-.product-cart-button:hover {
-  background-color: #d66572;
+  flex-shrink: 0;
 }
 
 .inactive {
   background-color: #c39ca0;
+  pointer-events: none;
+  cursor: default;
+}
+
+.active {
+  cursor: pointer;
+}
+
+.active:hover {
+  background-color: #d66572;
 }

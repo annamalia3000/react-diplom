@@ -50,7 +50,6 @@ export const Catalog = () => {
 
   useEffect(() => {
     if (newProducts) {
-      console.log("Получены новые товары:", newProducts);
       setProducts((prev) => [...prev, ...newProducts]);
       setHasMore(newProducts.length === 6);
     }

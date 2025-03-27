@@ -1,12 +1,7 @@
 .catalog-container {
-  min-height: 600px;
   display: flex;
   width: 100%;
   justify-content: center;
 }
 
-/* .catalog-item-size.selected {
-    background: #727e86;
-    border-radius: 15px;
-    color: #fff;
-  } */
+
