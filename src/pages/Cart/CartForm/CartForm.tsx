@@ -14,6 +14,7 @@ export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
   const [address, setAddress] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState("");
 
   const { cart, setCart } = useCart();

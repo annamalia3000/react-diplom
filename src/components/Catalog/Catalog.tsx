@@ -29,6 +29,7 @@ export const Catalog = () => {
   const [hasMore, setHasMore] = useState(false);
 
   const searchValue = useSelector((state: RootState) => state.search.value);
+  const [noSearchResults, setNoSearchResults] = useState(false);
 
   const url = import.meta.env.VITE_HOST;
   const { data: categories, loading: categoriesLoading } = useFetch<
@@ -46,10 +47,14 @@ export const Catalog = () => {
     setProducts([]);
     setOffset(0);
     setHasMore(false);
+    setNoSearchResults(false);
   }, [categoryId, searchValue]);
 
   useEffect(() => {
     if (newProducts) {
+      if (newProducts.length === 0) {
+        setNoSearchResults(true);
+      }
       setProducts((prev) => [...prev, ...newProducts]);
       setHasMore(newProducts.length === 6);
     }
@@ -101,7 +106,14 @@ export const Catalog = () => {
           <Loader />
         ) : (
           <>
-            <CatalogContent data={products} />
+            {noSearchResults ? (
+              <h2 className={classes["no-search-results"]}>
+                Результатов по запросу "{searchValue}" не найдено
+              </h2>
+            ) : (
+              <CatalogContent data={products} />
+            )}
+
             {hasMore && (
               <MoreButton
                 loadMoreItems={loadMoreItems}
