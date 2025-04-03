@@ -19,7 +19,7 @@
   height: 20px;
   padding: 5px;
   background-color: white;
-  border: 2px solid #e8e8e8;
+  border: 2px solid #727e86;;
   border-radius: 5px;
   text-align: center;
   margin-top: 20px;
@@ -27,5 +27,5 @@
 
 .cartlist-main-btn:hover {
     color: white;
-    background-color: #e8e8e8;
+    background-color: #727e86;;
   }

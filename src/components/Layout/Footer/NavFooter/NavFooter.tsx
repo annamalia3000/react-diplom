@@ -1,5 +1,5 @@
-import { SectionFooter } from '../SectionFooter/SectionFooter';
-import { NavItem } from "../../NavItem/NavItem";
+import { SectionFooter } from "../SectionFooter/SectionFooter";
+import { NavItem } from "../../../NavItem/NavItem";
 import classes from "./navFooter.module.css";
 
 export const NavFooter = () => {

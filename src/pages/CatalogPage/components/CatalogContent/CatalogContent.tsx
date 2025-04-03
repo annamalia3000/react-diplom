@@ -1,4 +1,4 @@
-import { Card } from "../../Card/Card";
+import { Card } from "../../../../components/Card/Card";
 import classes from "./catalogContent.module.css";
 
 type CatalogContentProps = {

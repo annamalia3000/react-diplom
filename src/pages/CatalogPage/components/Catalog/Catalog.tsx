@@ -1,12 +1,12 @@
-import { useFetch } from "../../hooks/useFetch";
+import { useFetch } from "../../../../hooks/useFetch";
 import { useState, useCallback, useEffect } from "react";
-import { Loader } from "../Loader/Loader";
-import { Section } from "../Section/Section";
-import { CatalogContent } from "./CatalogContent/CatalogContent";
-import { CatalogNav } from "./CatalogNav/CatalogNav";
-import { MoreButton } from "./MoreButton/MoreButton";
+import { Loader } from "../../../../components/Loader/Loader";
+import { Section } from "../../../../components/Section/Section";
+import { CatalogContent } from "../CatalogContent/CatalogContent";
+import { CatalogNav } from "../CatalogNav/CatalogNav";
+import { MoreButton } from "../MoreButton/MoreButton";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/state/store";
+import { RootState } from "../../../../redux/state/store";
 import classes from "./catalog.module.css";
 
 type ProductProps = {

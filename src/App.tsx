@@ -33,7 +33,7 @@ function App() {
   );
   return (
     <CartProvider>
-      <RouterProvider router={routes} />;
+      <RouterProvider router={routes} />
     </CartProvider>
   );
 }

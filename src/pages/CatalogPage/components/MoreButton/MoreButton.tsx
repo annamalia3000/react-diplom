@@ -1,6 +1,7 @@
-import { Loader } from "../../Loader/Loader";
+import { Loader } from "../../../../components/Loader/Loader";
 import cn from "classnames";
 import classes from "./moreButton.module.css";
+
 
 type MoreButtonProps = {
   loadMoreItems: () => void;

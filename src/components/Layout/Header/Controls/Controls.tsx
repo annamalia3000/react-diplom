@@ -1,16 +1,30 @@
 import { useState, useRef, useEffect } from "react";
-import { Search } from "../../Search/Search";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { RootState } from "../../../redux/state/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { RootState } from "../../../../redux/state/store";
+import { changeSearchField } from "../../../../redux/slicers/searchSlice";
+import { Search } from "../../../Search/Search";
+
+
 import cn from "classnames";
 import classes from "./controls.module.css";
+
 
 export const Controls = () => {
   const [isSearchVisible, setSearchVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const searchValue = useSelector((state: RootState) => state.search.value);
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const cartCount = useSelector((state: RootState) => state.cartCount.value);
+
+  useEffect(() => {
+    if (location.pathname !== "/catalog") {
+      setSearchVisible(false);
+      dispatch(changeSearchField(""));
+    }
+  }, [location, dispatch]);
 
   useEffect(() => {
     if (isSearchVisible) {
@@ -21,7 +35,7 @@ export const Controls = () => {
   const handleSearch = () => {
     if (isSearchVisible && searchValue) {
       navigate("/catalog");
-      setSearchVisible((prev) => !prev);
+      setSearchVisible(false);
     } else {
       setSearchVisible((prev) => !prev);
     }
@@ -44,10 +58,21 @@ export const Controls = () => {
           classes["header-controls-cart"]
         )}
       >
-        <div className={classes["header-controls-cart-full"]}>1</div>
-        <div className={classes["header-controls-cart-menu"]}></div>
+        {cartCount > 0 && (
+          <div className={classes["header-controls-cart-full"]}>
+            {cartCount}
+          </div>
+        )}
+        <Link
+          to="/cart"
+          className={classes["header-controls-cart-menu"]}
+        ></Link>
         {isSearchVisible && (
-          <Search ref={inputRef} className={classes["search-header"]} />
+          <Search
+            ref={inputRef}
+            className={classes["search-header"]}
+            setVisible={setSearchVisible}
+          />
         )}
       </div>
     </div>

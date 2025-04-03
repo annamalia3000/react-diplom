@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
+import { useDispatch } from "react-redux";
+import { setTotalCount, incrementByAmount, decrementByAmount } from "../redux/slicers/cartCountSlice";
 import { ItemCartProps, DataProps } from "../types/types";
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const cartKey = "cart";
+  const dispatch = useDispatch();
 
   const getCart = (): ItemCartProps[] => {
     return JSON.parse(localStorage.getItem(cartKey) || "[]");
@@ -12,7 +15,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<ItemCartProps[]>(getCart());
   useEffect(() => {
     localStorage.setItem(cartKey, JSON.stringify(cart));
-  }, [cart]);
+    const total = cart.reduce((sum, item) => sum + item.count, 0);
+    dispatch(setTotalCount(total));
+  }, [cart, dispatch]);
 
   const addToCart = ({
     selectedSize,
@@ -46,10 +51,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     setCart([...updatedCart]);
+    dispatch(incrementByAmount(count));
   };
 
   const removeFromCart = (id: number, size: string) => {
+    const item = cart.find((item) => item.id === id && item.size === size);
+    if (!item) {
+      return;
+    }
     setCart((prev) => prev.filter((item) => !(item.id === id && item.size === size)));
+    dispatch(decrementByAmount(item.count));
   };
 
   return (

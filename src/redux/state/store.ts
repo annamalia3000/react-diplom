@@ -1,12 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
-import searchReducer from '../slicers/searchSlice'
-// import cardReducer from "../slicers/usersSlice";
-
+import searchReducer from "../slicers/searchSlice";
+import cartCountReducer from "../slicers/cartCountSlice";
 
 const rootReducer = combineReducers({
   search: searchReducer,
-  // card: cardReducer,
+  cartCount: cartCountReducer,
 });
 
 export const store = configureStore({
@@ -15,4 +13,3 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
