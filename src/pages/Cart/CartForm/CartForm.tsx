@@ -10,9 +10,6 @@ type CartFormProps = {
 };
 
 export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [agreement, setAgreement] = useState(false);
   const [loading, setLoading] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState("");
@@ -21,8 +18,10 @@ export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
 
   const url = `${import.meta.env.VITE_HOST}/api/order`;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (formData: FormData) => {
+    const phone = formData.get("phone") as string;
+    const address = formData.get("address") as string;
+    const agreement = formData.get("agreement") === "on";;
 
     if (!phone.trim() || !address.trim() || !agreement) {
       setError("Заполните все поля и согласитесь с правилами");
@@ -59,9 +58,6 @@ export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
       }
 
       setSuccess(true);
-      setPhone("");
-      setAddress("");
-      setAgreement(false);
 
       setCart([]);
       console.log(cart);
@@ -81,10 +77,10 @@ export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
       ) : (
         <div className={classes["cartform-content"]}>
           <h2 className={classes["cartform-title"]}>Оформить заказ</h2>
-          <form onSubmit={handleSubmit} className={classes["cartform-form"]}>
+          <form action={handleSubmit} className={classes["cartform-form"]}>
             <div className={classes["cartform-form-tel"]}>
               <label htmlFor="phone"> Tелефон </label>
-              <PhoneInput value={phone} onChange={setPhone} />
+              <PhoneInput/>
             </div>
             <div className={classes["cartform-form-address"]}>
               <label htmlFor="address">Адрес доставки </label>
@@ -93,20 +89,12 @@ export const CartForm: React.FC<CartFormProps> = ({ setSuccess }) => {
                 type="text"
                 placeholder="Адрес доставки"
                 name="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
                 required
                 className={classes["cartform-form-input"]}
               />
             </div>
             <div className={classes["cartform-form-agreement"]}>
-              <input
-                type="checkbox"
-                id="agreement"
-                name="agreement"
-                onChange={(e) => setAgreement(e.target.checked)}
-                required
-              />
+              <input type="checkbox" id="agreement" name="agreement" required />
               <label htmlFor="agreement">Согласен с правилами доставки </label>
             </div>
             <button type="submit" className={classes["cartform-form-btn"]}>
