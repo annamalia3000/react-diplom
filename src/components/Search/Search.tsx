@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeSearchField } from "../../redux/slicers/searchSlice";
 import { RootState } from "../../redux/state/store";
@@ -7,35 +7,42 @@ import { useNavigate } from "react-router-dom";
 
 type SearchProps = {
   className: string;
-  setVisible: (value:boolean) => void;
-
-}
+  setVisible: (value: boolean) => void;
+};
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
   ({ className, setVisible }, ref) => {
     const dispatch = useDispatch();
-    const searchValue = useSelector((state: RootState) => state.search.value);
     const navigate = useNavigate();
+    const searchValue = useSelector((state: RootState) => state.search.value);
 
-    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value.trim();
-      if (value === searchValue) {
-        return;
-      }
-      dispatch(changeSearchField(value));
+    const [inputValue, setInputValue] = useState(searchValue);
+
+    useEffect(() => {
+      const handler = setTimeout(() => {
+        if (inputValue !== searchValue) {
+          dispatch(changeSearchField(inputValue));
+        }
+      }, 1000);
+      return () => {
+        clearTimeout(handler);
+      };
+    }, [inputValue, dispatch, searchValue]);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(event.target.value);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-     if (event.key === "Enter") {
-      event.preventDefault();
-      const value = event.currentTarget.value.trim();
-      setVisible(false);
-      if (value) {
-        dispatch(changeSearchField(value));
-        navigate("/catalog");
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const value = event.currentTarget.value.trim();
+        setVisible(false);
+        if (value) {
+          dispatch(changeSearchField(inputValue));
+          navigate("/catalog");
+        }
       }
-      
-     }
     };
 
     return (
@@ -45,11 +52,9 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           className={classes["form-control"]}
           placeholder="Поиск"
           type="search"
-          value={searchValue}
-          onChange={handleSearch}
+          value={inputValue}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
-        
-         
         />
       </form>
     );
